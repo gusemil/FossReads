@@ -19,5 +19,6 @@
 * User pages
 * User reviews
 * User book data import from GoodReads
+* (Unit) Tests
 * Containerization (Docker)
 * Deploy (Azure)

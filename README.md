@@ -18,6 +18,7 @@
 ## Planned Features
 * User pages
 * User reviews
+* Internationalization (i18n)
 * User book data import from GoodReads
 * (Unit) Tests
 * Containerization (Docker)

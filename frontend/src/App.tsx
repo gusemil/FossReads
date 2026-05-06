@@ -2,7 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import BooksPage from "./pages/BooksPage";
 import RegisterPage from "./pages/RegisterPage";
-import ProtectedRoute from "./components/protectedRoute";
+import ReviewsPage from "./pages/ReviewsPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 //import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -16,6 +17,15 @@ function App() {
         element={
           <ProtectedRoute>
             <BooksPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/reviews/:bookId"
+        element={
+          <ProtectedRoute>
+            <ReviewsPage />
           </ProtectedRoute>
         }
       />

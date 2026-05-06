@@ -18,43 +18,35 @@ api.interceptors.request.use((config) => {
 
 export default api;
 
-export const getBooks = async (page: number, pageSize: number = 10) => {
-  const res = await api.get("/api/books", { params: { page, pageSize } });
+export const getReviews = async (page: number, pageSize: number = 10) => {
+  const res = await api.get("/api/reviews", { params: { page, pageSize } });
 
   return res.data;
 };
 
-export const getBookById = async (id: number) => {
-  const res = await api.get(`/api/books/${id}`);
-  return res.data;
-};
-
-export const createBook = async (book: {
+export const createReview = async (review: {
   title: string;
-  author: string;
   description?: string;
-  publishedYear: number;
-  status: number;
+  stars: number;
+  bookId: number;
 }) => {
-  const res = await api.post("/api/books", book);
+  const res = await api.post("/api/reviews", review);
   return res.data;
 };
 
-export const deleteBook = async (id: number) => {
-  await api.delete(`/api/books/${id}`);
+export const deleteReview = async (id: number) => {
+  await api.delete(`/api/reviews/${id}`);
 };
 
-export const updateBook = async (
+export const updateReview = async (
   id: number,
-  book: {
+  review: {
     title: string;
-    author: string;
     description?: string;
-    publishedYear: number;
-    status: number;
+    stars: number;
   }
 ) => {
-  await api.put(`/api/books/${id}`, book);
+  await api.put(`/api/reviews/${id}`, review);
 };
 
 export const login = async (username: string, password: string) => {

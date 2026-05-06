@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using FossReadsAPI.Entities;
 
 namespace FossReadsAPI.DTOs;
 
@@ -17,4 +18,6 @@ public class CreateBookDto
 
     [Range(0, 2100)]
     public int PublishedYear { get; set; }
+
+    public ReadingStatus Status { get; set; } = ReadingStatus.NoProgress;
 }

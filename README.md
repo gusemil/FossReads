@@ -13,11 +13,12 @@
 ## Current Features
 * Register and Login users
 * Create, Edit and Delete books
+* User reviews
+* Book Status (No Progress,Want to Read,Owned,In Progress,Read,Did Not Finish)
 * Pagination
 
 ## Planned Features
 * User pages
-* User reviews
 * Internationalization (i18n)
 * User book data import from GoodReads
 * (Unit) Tests

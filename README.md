@@ -23,6 +23,7 @@
 * Dark/Light Mode toggle
 
 ## Planned Features
+* CI/CD (GitHub Actions)
 * Accessibility features
 * User book data import from GoodReads
 * (Unit) Tests

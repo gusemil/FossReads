@@ -15,11 +15,14 @@
 * Create, Edit and Delete books
 * User reviews
 * Book Status (No Progress,Want to Read,Owned,In Progress,Read,Did Not Finish)
+* Book Ownership (Physical, E-book, Lended, Not Owned)
 * Pagination
-
-## Planned Features
+* Upload images for books
 * User pages
 * Internationalization (i18n)
+* Dark/Light Mode toggle
+
+## Planned Features
 * User book data import from GoodReads
 * (Unit) Tests
 * Containerization (Docker)

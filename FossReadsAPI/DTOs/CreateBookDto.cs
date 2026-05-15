@@ -20,4 +20,5 @@ public class CreateBookDto
     public int PublishedYear { get; set; }
 
     public ReadingStatus Status { get; set; } = ReadingStatus.NoProgress;
+    public Ownership? Ownership { get; set; }
 }

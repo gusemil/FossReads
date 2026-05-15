@@ -9,6 +9,10 @@ public class Book
     public int PublishedYear { get; set; }
 
     public ReadingStatus Status { get; set; } = ReadingStatus.NoProgress;
+    public DateTime? ReadDate { get; set; }
+    public Ownership? Ownership { get; set; }
+
+    public string? ImagePath { get; set; }
 
     public int UserId { get; set; }
     public User User { get; set; } = null!;

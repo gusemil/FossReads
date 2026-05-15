@@ -79,7 +79,8 @@ public async Task<ActionResult<Review>> CreateReview(CreateReviewDto dto)
         var userId = GetUserId();
 
         var query = _context.Reviews
-            .Where(b => b.UserId == userId); //Filter reviews to users
+            .Where(b => b.UserId == userId)
+            .Include(r => r.Book); //Include book so title is available
 
         var totalCount = await query.CountAsync();
 

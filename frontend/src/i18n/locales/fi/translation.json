@@ -1,0 +1,104 @@
+{
+  "app": {
+    "name": "FossReads"
+  },
+  "nav": {
+    "reviews": "Omat arvostelut",
+    "reviews": "← Omat Arvostelut",
+    "logout": "Kirjaudu ulos",
+    "books": "← Omat Kirjat",
+    "toggleDark": "Vaihda pimeätila"
+  },
+  "status": {
+    "0": "Ei edistymistä",
+    "1": "Haluan lukea",
+    "2": "Omistettu",
+    "3": "Kesken",
+    "4": "Luettu",
+    "5": "Ei luettu loppuun"
+  },
+  "ownership": {
+    "null": "Ei omistettu",
+    "0": "Fyysinen",
+    "1": "E-kirja",
+    "2": "Lainattu"
+  },
+  "books": {
+    "loading": "Ladataan kirjoja...",
+    "addBook": "Lisää kirja",
+    "editBook": "Muokkaa kirjaa",
+    "updateBook": "Päivitä kirja",
+    "title": "Otsikko",
+    "author": "Tekijä",
+    "description": "Kuvaus",
+    "cancel": "Peruuta",
+    "edit": "Muokkaa",
+    "delete": "Poista",
+    "review": "Arvostelu",
+    "addReview": "Lisää arvostelu",
+    "confirmDelete": "Haluatko varmasti poistaa tämän kirjan?",
+    "previous": "Edellinen",
+    "next": "Seuraava",
+    "page": "Sivu {{page}} / {{total}}",
+    "uploadImage": "Lataa kuva",
+    "changeImage": "Vaihda kuva",
+    "removeImage": "Poista kuva"
+  },
+  "reviews": {
+    "loading": "Ladataan arvosteluja...",
+    "loadingSingle": "Ladataan...",
+    "reviews": "Omat arvostelut",
+    "addReview": "Lisää arvostelu",
+    "editReview": "Muokkaa arvostelua",
+    "updateReview": "Päivitä arvostelu",
+    "editReviewTitle": "Muokkaa arvostelua",
+    "updateReviewTitle": "Päivitä arvostelu",
+    "title": "Otsikko",
+    "stars": "Tähdet (1-5)",
+    "description": "Kuvaus",
+    "cancel": "Peruuta",
+    "edit": "Muokkaa",
+    "delete": "Poista",
+    "confirmDelete": "Haluatko varmasti poistaa tämän arvostelun?",
+    "noReviews": "Ei arvosteluja vielä.",
+    "goToBooks": "Siirry kirjoihisi lisätäksesi arvostelun.",
+    "unknownBook": "Tuntematon kirja",
+    "previous": "Edellinen",
+    "next": "Seuraava",
+    "page": "Sivu {{page}} / {{total}}"
+  },
+  "login": {
+    "title": "Kirjaudu sisään",
+    "username": "Käyttäjänimi",
+    "password": "Salasana",
+    "submit": "Kirjaudu sisään",
+    "noAccount": "Ei tiliä?",
+    "register": "Rekisteröidy",
+    "failed": "Kirjautuminen epäonnistui"
+  },
+  "bookPage": {
+    "loading": "Ladataan kirjaa...",
+    "notFound": "Kirjaa ei löydy.",
+    "viewReview": "Katso arvostelu",
+    "readOn": "Luettu"
+  },
+  "user": {
+    "title": "Lukuhistoria",
+    "readOn": "Luettu",
+    "noBooks": "Ei vielä merkittyjä kirjoja luetuksi.",
+    "goToBooks": "Siirry kirjoihisi aloittaaksesi.",
+    "previous": "Edellinen",
+    "next": "Seuraava",
+    "page": "Sivu {{page}} / {{total}}"
+  },
+  "register": {
+    "title": "Rekisteröidy",
+    "username": "Käyttäjänimi",
+    "password": "Salasana",
+    "submit": "Rekisteröidy",
+    "hasAccount": "Onko sinulla jo tili?",
+    "login": "Kirjaudu sisään",
+    "success": "Käyttäjä luotu! Kirjaudu sisään.",
+    "failed": "Rekisteröityminen epäonnistui"
+  }
+}

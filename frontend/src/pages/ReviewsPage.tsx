@@ -1,9 +1,12 @@
 import { useNavigate, Navigate, useParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 import { createReview, deleteReview, updateReview } from "../api/reviewsApi";
 import { getBookById } from "../api/booksApi";
 import { logout, getToken, getUsernameFromToken } from "../api/auth";
+import { useDarkMode } from "../hooks/useDarkMode";
+import LangToggle from "../components/LangToggle";
 
 const username = getUsernameFromToken();
 
@@ -23,6 +26,7 @@ type Book = {
 };
 
 export default function ReviewsPage() {
+  const { t } = useTranslation();
   const { bookId } = useParams<{ bookId: string }>();
   const parsedBookId = Number(bookId);
 
@@ -36,6 +40,7 @@ export default function ReviewsPage() {
 
   const formRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
+  const { isDark, toggleDark } = useDarkMode();
 
   const isAuthenticated = !!getToken();
 
@@ -68,7 +73,7 @@ export default function ReviewsPage() {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Are you sure you want to delete this review?")) return;
+    if (!confirm(t("reviews.confirmDelete"))) return;
     try {
       await deleteReview(id);
       await loadBook();
@@ -96,32 +101,41 @@ export default function ReviewsPage() {
   };
 
   if (!isAuthenticated) return <Navigate to="/login" replace />;
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p className="dark:text-white">{t("reviews.loadingSingle")}</p>;
 
   const review = book?.review ?? null;
   const showForm = !review || editingId !== null;
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div className="flex items-center gap-3">
           <button
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/reviews")}
             className="text-blue-500 hover:underline text-sm"
           >
-            ← Books
+            {t("nav.reviews")}
           </button>
-          <h1 className="text-3xl font-bold">{book?.title ?? "Review"}</h1>
+          <h1 className="text-3xl font-bold dark:text-white">{book?.title ?? t("reviews.reviews")}</h1>
         </div>
 
         <div className="flex items-center gap-4">
-          <span className="text-gray-600">👤 {username}</span>
+          <button
+            onClick={() => navigate("/user")}
+            className="text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+          >
+            👤 {username}
+          </button>
+          <LangToggle />
+          <button onClick={toggleDark} className="text-xl" title={t("nav.toggleDark")}>
+            {isDark ? "☀️" : "🌙"}
+          </button>
           <button
             onClick={handleLogout}
             className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
           >
-            Logout
+            {t("nav.logout")}
           </button>
         </div>
       </div>
@@ -129,28 +143,27 @@ export default function ReviewsPage() {
       {/* Existing review */}
       {review && !editingId && (
         <div className="flex justify-center mb-6">
-          <div className="bg-white p-4 rounded-xl shadow w-full max-w-md flex justify-between items-start">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow w-full max-w-md flex justify-between items-start">
             <div>
               <p className="text-xl mb-1">{"⭐".repeat(review.stars)}</p>
-              <p className="font-semibold">{review.title}</p>
-              <p className="text-sm italic text-gray-500">{review.description}</p>
-              <p className="text-xs text-gray-400 mt-1">
+              <p className="font-semibold dark:text-white">{review.title}</p>
+              <p className="text-sm italic text-gray-500 dark:text-gray-400">{review.description}</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
                 {new Date(review.createdAt).toLocaleDateString()}
               </p>
             </div>
-
             <div className="space-x-2">
               <button
                 onClick={() => startEdit(review)}
                 className="bg-yellow-400 px-3 py-1 rounded hover:bg-yellow-500"
               >
-                Edit
+                {t("reviews.edit")}
               </button>
               <button
                 onClick={() => handleDelete(review.id)}
                 className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
               >
-                Delete
+                {t("reviews.delete")}
               </button>
             </div>
           </div>
@@ -160,46 +173,42 @@ export default function ReviewsPage() {
       {/* Form */}
       {showForm && (
         <div ref={formRef} className="flex justify-center">
-          <div className="bg-white p-6 rounded-2xl shadow mb-6 max-w-md w-full">
-            <h2 className="text-xl font-semibold mb-4">
-              {editingId ? "Edit review" : "Add review"}
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow mb-6 max-w-md w-full">
+            <h2 className="text-xl font-semibold mb-4 dark:text-white">
+              {editingId ? t("reviews.editReview") : t("reviews.addReview")}
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-3">
               <input
-                className="w-full border p-2 rounded"
-                placeholder="Title"
+                className="w-full border p-2 rounded dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                placeholder={t("reviews.title")}
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
-
               <input
-                className="w-full border p-2 rounded"
+                className="w-full border p-2 rounded dark:bg-gray-700 dark:text-white dark:border-gray-600"
                 type="number"
-                placeholder="Stars (1-5)"
+                placeholder={t("reviews.stars")}
                 value={stars || ""}
                 onChange={(e) => setStars(Number(e.target.value))}
               />
-
               <textarea
-                className="w-full border p-2 rounded"
-                placeholder="Description"
+                className="w-full border p-2 rounded dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                placeholder={t("reviews.description")}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
-
               <button
                 className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
                 type="submit"
                 disabled={!title || !(stars > 0 && stars < 6)}
               >
-                {editingId ? "Update review" : "Add review"}
+                {editingId ? t("reviews.updateReview") : t("reviews.addReview")}
               </button>
-
               {editingId && (
                 <button
                   type="button"
-                  className="w-full bg-gray-300 p-2 rounded hover:bg-gray-400"
+                  className="w-full bg-gray-300 dark:bg-gray-600 dark:text-white p-2 rounded hover:bg-gray-400 dark:hover:bg-gray-500"
                   onClick={() => {
                     setEditingId(null);
                     setTitle("");
@@ -207,7 +216,7 @@ export default function ReviewsPage() {
                     setStars(0);
                   }}
                 >
-                  Cancel
+                  {t("reviews.cancel")}
                 </button>
               )}
             </form>

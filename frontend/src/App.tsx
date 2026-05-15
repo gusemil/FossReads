@@ -3,6 +3,9 @@ import LoginPage from "./pages/LoginPage";
 import BooksPage from "./pages/BooksPage";
 import RegisterPage from "./pages/RegisterPage";
 import ReviewsPage from "./pages/ReviewsPage";
+import AllReviewsPage from "./pages/AllReviewsPage";
+import UserPage from "./pages/UserPage";
+import BookPage from "./pages/BookPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 //import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -22,10 +25,37 @@ function App() {
       />
 
       <Route
+        path="/reviews"
+        element={
+          <ProtectedRoute>
+            <AllReviewsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
         path="/reviews/:bookId"
         element={
           <ProtectedRoute>
             <ReviewsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/user"
+        element={
+          <ProtectedRoute>
+            <UserPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/books/:bookId"
+        element={
+          <ProtectedRoute>
+            <BookPage />
           </ProtectedRoute>
         }
       />

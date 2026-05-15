@@ -24,6 +24,11 @@ export const getBooks = async (page: number, pageSize: number = 10) => {
   return res.data;
 };
 
+export const getReadBooks = async (page: number, pageSize: number = 10) => {
+  const res = await api.get("/api/books/read", { params: { page, pageSize } });
+  return res.data;
+};
+
 export const getBookById = async (id: number) => {
   const res = await api.get(`/api/books/${id}`);
   return res.data;
@@ -35,6 +40,7 @@ export const createBook = async (book: {
   description?: string;
   publishedYear: number;
   status: number;
+  ownership?: number | null;
 }) => {
   const res = await api.post("/api/books", book);
   return res.data;
@@ -52,9 +58,23 @@ export const updateBook = async (
     description?: string;
     publishedYear: number;
     status: number;
+    ownership?: number | null;
   }
 ) => {
   await api.put(`/api/books/${id}`, book);
+};
+
+export const uploadBookImage = async (id: number, file: File) => {
+  const form = new FormData();
+  form.append("image", file);
+  const res = await api.post(`/api/books/${id}/image`, form, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+  return res.data as { imagePath: string };
+};
+
+export const deleteBookImage = async (id: number) => {
+  await api.delete(`/api/books/${id}/image`);
 };
 
 export const login = async (username: string, password: string) => {

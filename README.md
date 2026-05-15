@@ -23,6 +23,7 @@
 * Dark/Light Mode toggle
 
 ## Planned Features
+* Accessibility features
 * User book data import from GoodReads
 * (Unit) Tests
 * Containerization (Docker)

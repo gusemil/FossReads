@@ -1,6 +1,6 @@
 # FossReads
 
-(Currently) A Simple Book database site to demonstrate my skills in TypeScript, React and .NET:. 
+(Currently) A Simple Book database site to demonstrate my skills in TypeScript, React and .NET 
 
 ## The Stack
 * Frontend: React + TypeScript
@@ -21,11 +21,11 @@
 * User pages
 * Internationalization (i18n)
 * Dark/Light Mode toggle
+* Unit) Tests
+* Containerization (Docker)
 
 ## Planned Features
+* Deploy (Azure)
 * CI/CD (GitHub Actions)
 * Accessibility features
 * User book data import from GoodReads
-* (Unit) Tests
-* Containerization (Docker)
-* Deploy (Azure)

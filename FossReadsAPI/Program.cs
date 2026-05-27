@@ -12,7 +12,10 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy
-                .WithOrigins("http://localhost:5173") //Why this port?
+                .WithOrigins(
+                    "http://localhost:5173",  // Vite dev server
+                    "http://localhost"        // nginx in Docker
+                )
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
@@ -51,10 +54,21 @@ builder.Services.AddAuthentication(options =>
 
 var app = builder.Build();
 
+// Apply any pending EF Core migrations automatically on startup.
+// This means you never need to run "dotnet ef database update" manually —
+// the container handles it every time it starts up.
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
+
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
+// HTTPS redirection is intentionally omitted here.
+// In Docker the API runs plain HTTP inside the private container network;
+// TLS termination is handled by the reverse proxy (nginx / Azure Front Door).
 app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();

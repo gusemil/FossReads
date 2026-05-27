@@ -2,8 +2,10 @@ import axios from "axios";
 import { getToken } from "./auth";
 import { logout } from "./auth";
 
+// In local dev:   VITE_API_BASE_URL is undefined → falls back to localhost:5128
+// In Docker:      VITE_API_BASE_URL="" → axios uses relative URLs → nginx proxies /api/* to the API container
 const api = axios.create({
-  baseURL: "http://localhost:5128" //Connecting to .NET API
+  baseURL: import.meta.env.VITE_API_BASE_URL ?? "http://localhost:5128"
 });
 
 api.interceptors.request.use((config) => {

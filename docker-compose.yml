@@ -1,0 +1,54 @@
+services:
+
+  # ── PostgreSQL database ──────────────────────────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB:       bookdb
+      POSTGRES_USER:     postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      # Named volume keeps data between docker compose down / up cycles.
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      # Expose to host so you can still connect with pgAdmin or psql locally.
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ── ASP.NET Core API ─────────────────────────────────────────────────────────
+  api:
+    build:
+      context: ./FossReadsAPI
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      # "db" is the service name above — Docker's DNS resolves it automatically.
+      # ASP.NET Core maps ConnectionStrings__DefaultConnection → ConnectionStrings:DefaultConnection
+      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=bookdb;Username=postgres;Password=${POSTGRES_PASSWORD}"
+      Jwt__Key:    ${JWT_KEY}
+      Jwt__Issuer: "FossReadsAPI"
+      ASPNETCORE_ENVIRONMENT: Production
+    depends_on:
+      db:
+        condition: service_healthy   # wait until postgres is actually ready
+
+  # ── React frontend (nginx) ───────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # Empty string → axios uses relative URLs → nginx proxies to the api service.
+        VITE_API_BASE_URL: ""
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:

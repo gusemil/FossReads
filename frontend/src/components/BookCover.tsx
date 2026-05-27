@@ -1,4 +1,5 @@
-const API_BASE = "http://localhost:5128";
+// Same logic as booksApi.ts: empty string in Docker means relative URL → nginx proxies /images/* to API.
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:5128";
 
 type Props = {
   imagePath?: string | null;

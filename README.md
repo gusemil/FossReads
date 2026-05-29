@@ -21,7 +21,7 @@
 * User pages
 * Internationalization (i18n)
 * Dark/Light Mode toggle
-* Unit) Tests
+* Unit Tests (xUnit)
 * Containerization (Docker)
 
 ## Planned Features

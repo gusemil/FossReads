@@ -1,6 +1,6 @@
 # FossReads
 
-(Currently) A Simple Book database site to demonstrate my skills in TypeScript, React and .NET 
+A book database site to demonstrate my skills in TypeScript, React and .NET 
 
 ## The Stack
 * Frontend: React + TypeScript

@@ -27,7 +27,7 @@
 
 ---
 
-# FossReads Detailed Information and Running guide
+# FossReads Detailed Information and Deployment Guide
 
 ## Features
 

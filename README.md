@@ -170,5 +170,4 @@ See Swagger UI for request/response schemas, or the table in
 
 ## Status & license
 
-Personal learning project, under active development. No open-source license file
-is committed yet — add a `LICENSE` before distributing.
+Personal learning project, under active development. Do what you want with it.

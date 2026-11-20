@@ -170,4 +170,4 @@ See Swagger UI for request/response schemas, or the table in
 
 ## Status & license
 
-Personal learning project, under active development. Do what you want with it.
+Personal learning project, currently no longer in development. Do what you want with it.
